@@ -1,0 +1,17 @@
+name: Webflow Site Publish Handler
+
+on:
+  repository_dispatch:
+    types: [site_publish]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Run script
+      run: |
+        # Здесь ваш скрипт, который обрабатывает изменения от Webflow
