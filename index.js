@@ -155,8 +155,8 @@ async function fetchCSS (url, expectedTimestamp = null) {
 }
 
 async function fetchSitemap (site) {
-  const response = await fetch(`${site}/sitemap.xml`)
-
+  const response = await fetch(`https://tps-jet.webflow.io/sitemap.xml`)
+  console.log('response: ', response);
   if (!response.ok) {
     if (response.status === 404) {
       return null
