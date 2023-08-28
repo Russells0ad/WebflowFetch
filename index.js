@@ -108,7 +108,7 @@ async function processSite(config) {
     }
 
     const pages = getPages(sitemap).filter((page) =>
-      config.pages.valid(`/${page}`)
+      config.pages.valid(`${page}`)
     );
 
     const pageContents = await Promise.all(
