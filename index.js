@@ -13,6 +13,9 @@ const CSS_PATTERN = '.*(?:(?:\\/.*\\.webflow)|(?:website-files.com.*))\\.[a-z0-9
 const CSS_REGEX = new RegExp(`<link href="(${CSS_PATTERN})".*\\/>`)
 const CSS_REPLACE_REGEX = new RegExp(`(?<=<link href=")(${CSS_PATTERN})(?=".*\\/>)`)
 
+console.log('GITHUB_REPOSITORY ', process.env.GITHUB_REPOSITORY);
+console.log('GITHUB_WORKSPACE ', process.env.GITHUB_WORKSPACE);
+
 class RetryError extends Error {
   constructor () {
     super('Retrying resource')
@@ -305,15 +308,20 @@ async function main () {
   const config = await init()
 
   if (!config.site) {
+    console.log('GITHUB_REPOSITORY ', process.env.GITHUB_REPOSITORY);
+    console.log('GITHUB_WORKSPACE ', process.env.GITHUB_WORKSPACE);
     console.log('Missing site, skipping')
     return
   }
 
   await retry(() => processSite(config), RETRY_COUNT, RetryAllError, RETRY_DELAY * 2)
 }
-
+console.log('GITHUB_REPOSITORY ', process.env.GITHUB_REPOSITORY);
+console.log('GITHUB_WORKSPACE ', process.env.GITHUB_WORKSPACE);
 main()
   .then(() => {
+  console.log('GITHUB_REPOSITORY ', process.env.GITHUB_REPOSITORY);
+  console.log('GITHUB_WORKSPACE ', process.env.GITHUB_WORKSPACE);
     console.log('Executed successfully')
   })
   .catch((error) => {
