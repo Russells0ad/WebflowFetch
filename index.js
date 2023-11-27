@@ -16,6 +16,7 @@ const CSS_REPLACE_REGEX = new RegExp(
   `(?<=<link href=")(${CSS_PATTERN})(?=".*\\/>)`
 );
 
+/*
 const JS_PATTERN =
   "https:\\/\\/uploads-ssl\\.webflow\\.com\\/.*\\/webflow\\.[a-z0-9]+\\.js";
 const JS_REGEX = new RegExp(
@@ -26,6 +27,7 @@ const JS_REPLACE_REGEX = new RegExp(
   `(?<=<script src=")(${JS_PATTERN})(?=".*?>.*?<\\/script>)`,
   "s"
 );
+*/
 
 class RetryError extends Error {
   constructor() {
@@ -87,12 +89,12 @@ async function processSite(config) {
   let css = await retry(() => fetchCSS(cssUrl, timestamp), RETRY_COUNT);
   css = formatCSS(css);
   await writeFile("style.css", css);
-
+/*
   const jsURL = getJSURL(index);
   let js = await retry(() => fetchJS(jsURL, timestamp), RETRY_COUNT);
   js = formatJS(js);
   await writeFile("webflow.js", js);
-
+*/
   if (config.pages) {
     console.log("Fetching pages");
 
@@ -163,7 +165,7 @@ function getCSSURL(index) {
   const cssURL = cssMatch[1];
   return cssURL;
 }
-
+/*
 function getJSURL(index) {
   const jsMatch = index.match(JS_REGEX);
 
@@ -174,7 +176,7 @@ function getJSURL(index) {
   const jsURL = jsMatch[1];
   return jsURL;
 }
-
+*/
 async function fetchCSS(url, expectedTimestamp = null) {
   const response = await fetch(url);
 
@@ -189,7 +191,7 @@ async function fetchCSS(url, expectedTimestamp = null) {
 
   return css;
 }
-
+/*
 async function fetchJS(url, expectedTimestamp = null) {
   const response = await fetch(url);
 
@@ -204,7 +206,7 @@ async function fetchJS(url, expectedTimestamp = null) {
 
   return js;
 }
-
+*/
 async function fetchSitemap(site) {
   const response = await fetch(`${site}/sitemap.xml`);
 
@@ -249,7 +251,7 @@ function getTimestampFromCSS(css) {
   const timestamp = timestampMatch[1];
   return new Date(timestamp).toISOString();
 }
-
+/*
 function getTimestampFromJS(js) {
   const timestampMatch = js.match(/\/* Generated on: ([^(]+) \(/);
   if (!timestampMatch) {
@@ -259,7 +261,7 @@ function getTimestampFromJS(js) {
   const timestamp = timestampMatch[1];
   return new Date(timestamp).toISOString();
 }
-
+*/
 function getTimestampFromHTML(html) {
   const timestampMatch = html.match(/<!-- Last Published: ([^(]+) \(/);
   if (!timestampMatch) {
@@ -277,7 +279,7 @@ function formatCSS(css) {
 
   return css;
 }
-
+/*
 function formatJS(js) {
   // js = prettier.format(js, { parser: "js" });
 
@@ -286,7 +288,7 @@ function formatJS(js) {
 
   return js;
 }
-
+*/
 function formatHTML(html) {
   html = prettier.format(html, { parser: "html", printWidth: 200 });
 
