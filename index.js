@@ -299,7 +299,7 @@ function formatHTML(html) {
 
   // Remove the style hash
   html = html.replace(CSS_REPLACE_REGEX, "./style.css");
-  html = html.replace(JS_REPLACE_REGEX, "./webflow.js");
+  /*html = html.replace(JS_REPLACE_REGEX, "./webflow.js");*/
 
   return html;
 }
