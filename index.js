@@ -129,7 +129,7 @@ async function processSite(config) {
 async function getPage(site, page, timestamp) {
 console.log('site: ', site);
 console.log('page: ', page);
-console.log('pages: ', site + page);
+console.log('pages: ', site +'/'+ page);
   try {
     let html = await retry(
       () => fetchPage(`${site}/${page}`, timestamp),
