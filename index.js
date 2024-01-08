@@ -50,7 +50,7 @@ function getInputBoolean(name) {
 
 async function init() {
   const repositoryName = process.env.GITHUB_REPOSITORY.replace(/^[^/]*\//, "");
-
+  console.log('repositoryName: ', repositoryName);
   const config = {
     site: repositoryName.includes(".") ? `https://${repositoryName}` : "",
     pages: true,
