@@ -100,6 +100,7 @@ async function processSite(config) {
 
     if (config.pages.valid("/index")) {
       index = formatHTML(index);
+console.log('index 777: ', index);
       await writeFile("index.html", index);
     }
 
