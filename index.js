@@ -100,7 +100,6 @@ async function processSite(config) {
 
     if (config.pages.valid("/index")) {
       index = formatHTML(index);
-console.log('index 777: ', index);
       await writeFile("index.html", index);
     }
 
@@ -130,7 +129,7 @@ console.log('index 777: ', index);
 async function getPage(site, page, timestamp) {
 console.log('site: ', site);
 console.log('page: ', page);
-console.log('page: ', page ? 'true':'false');
+console.log('pages: ', site + page);
   try {
     let html = await retry(
       () => fetchPage(`${site}/${page}`, timestamp),
